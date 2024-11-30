@@ -47,6 +47,6 @@ noisyMusic(FS_Index:FS_Index + length(disturb) - 1, :) = ...
 noisyMusic = noisyMusic / max(abs(noisyMusic), [], 'all');
 
 % Save the combined audio as a new file
-audiowrite('noisyAudio.wav', noisyMusic, Fs_m);
+audiowrite('noisySong.wav', noisyMusic, Fs_m);
 
 disp('Audio processing completed and saved as noisyAudio.wav');
