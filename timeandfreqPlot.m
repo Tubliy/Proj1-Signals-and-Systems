@@ -1,118 +1,98 @@
 
-% Loading the audio file 
+% Create a new figure
+figure;
+
+% Plot for 'song.wav'
 [y, Fs] = audioread('song.wav');
-
-% Calculate the duration of the audio signal in seconds
 duration = length(y) / Fs;
-
-% Create a time vector based on the audio duration
 t = linspace(0, duration, length(y));
+Y = fft(y);
+freq_resolution = Fs / length(Y);
+f = linspace(0, Fs - freq_resolution, length(Y));
 
-% Plot the time-domain signal
-subplot(2,1,1);
+% Time domain of song.wav
+subplot(4, 2, 1);
 plot(t, y);
-title('Time Domain Signal');
+title('song.wav - Time Domain');
 xlabel('Time (s)');
 ylabel('Amplitude');
 
-% Compute the FFT (Fast Fourier Transform) of the audio signal
-Y = fft(y);
-
-% Calculate the frequency resolution
-freq_resolution = Fs / length(Y);
-
-% Create a frequency vector for the FFT plot
-f = linspace(0, Fs - freq_resolution, length(Y));
-
-% Plot the single-sided amplitude spectrum of the audio signal
-subplot(2,1,2);
+% Frequency domain of song.wav
+subplot(4, 2, 2);
 plot(f, abs(Y));
-title('Frequency Domain Signal');
+title('song.wav - Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-
-% Display only positive frequencies in the plot
 xlim([0, Fs/2]);
 
-% Show the plots
-sgtitle('Audio Signal in Time and Frequency Domains');
-%%
-% Loading the audio file 
+% Plot for 'noisySong.wav'
 [y, Fs] = audioread('noisySong.wav');
-
-% Calculate the duration of the audio signal in seconds
 duration = length(y) / Fs;
-
-% Create a time vector based on the audio duration
 t = linspace(0, duration, length(y));
+Y = fft(y);
+freq_resolution = Fs / length(Y);
+f = linspace(0, Fs - freq_resolution, length(Y));
 
-% Plot the time-domain signal
-subplot(2,1,1);
+% Time domain of noisySong.wav
+subplot(4, 2, 3);
 plot(t, y);
-title('Time Domain Signal');
+title('noisySong.wav - Time Domain');
 xlabel('Time (s)');
 ylabel('Amplitude');
 
-% Compute the FFT (Fast Fourier Transform) of the audio signal
-Y = fft(y);
-
-% Calculate the frequency resolution
-freq_resolution = Fs / length(Y);
-
-% Create a frequency vector for the FFT plot
-f = linspace(0, Fs - freq_resolution, length(Y));
-
-% Plot the single-sided amplitude spectrum of the audio signal
-subplot(2,1,2);
+% Frequency domain of noisySong.wav
+subplot(4, 2, 4);
 plot(f, abs(Y));
-title('Frequency Domain Signal');
+title('noisySong.wav - Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-
-% Display only positive frequencies in the plot
 xlim([0, Fs/2]);
 
-% Show the plots
-sgtitle('Audio Signal in Time and Frequency Domains');
-
-%%
-% Loading the audio file 
+% Plot for 'cleanSong.wav'
 [y, Fs] = audioread('cleanSong.wav');
-
-% Calculate the duration of the audio signal in seconds
 duration = length(y) / Fs;
-
-% Create a time vector based on the audio duration
 t = linspace(0, duration, length(y));
+Y = fft(y);
+freq_resolution = Fs / length(Y);
+f = linspace(0, Fs - freq_resolution, length(Y));
 
-% Plot the time-domain signal
-subplot(2,1,1);
+% Time domain of cleanSong.wav
+subplot(4, 2, 5);
 plot(t, y);
-title('Time Domain Signal');
+title('cleanSong.wav - Time Domain');
 xlabel('Time (s)');
 ylabel('Amplitude');
 
-% Compute the FFT (Fast Fourier Transform) of the audio signal
-Y = fft(y);
-
-% Calculate the frequency resolution
-freq_resolution = Fs / length(Y);
-
-% Create a frequency vector for the FFT plot
-f = linspace(0, Fs - freq_resolution, length(Y));
-
-% Plot the single-sided amplitude spectrum of the audio signal
-subplot(2,1,2);
+% Frequency domain of cleanSong.wav
+subplot(4, 2, 6);
 plot(f, abs(Y));
-title('Frequency Domain Signal');
+title('cleanSong.wav - Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-
-% Display only positive frequencies in the plot
 xlim([0, Fs/2]);
 
-% Show the plots
-sgtitle('Audio Signal in Time and Frequency Domains');
+[y, Fs] = audioread('audiodisturb.wav');
+duration = length(y) / Fs;
+t = linspace(0, duration, length(y));
+Y = fft(y);
+freq_resolution = Fs / length(Y);
+f = linspace(0, Fs - freq_resolution, length(Y));
 
+% Time domain of cleanSong.wav
+subplot(4, 2, 7);
+plot(t, y);
+title('audiodistrub.wav - Time Domain');
+xlabel('Time (s)');
+ylabel('Amplitude');
 
+% Frequency domain of cleanSong.wav
+subplot(4, 2, 8);
+plot(f, abs(Y));
+title('audiodistrub.wav - Frequency Domain');
+xlabel('Frequency (Hz)');
+ylabel('Magnitude');
+xlim([0, Fs/2]);
+
+% Add a global title for the entire figure
+sgtitle('Audio Signal Analysis: Time and Frequency Domains');
 
