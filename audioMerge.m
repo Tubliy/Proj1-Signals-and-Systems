@@ -39,14 +39,14 @@ if size(music, 2) > 1 && size(disturb, 2) == 1
 end
 
 % Add disturbance to the music
-noisyMusic = music;
-noisyMusic(FS_Index:FS_Index + length(disturb) - 1, :) = ...
-    noisyMusic(FS_Index:FS_Index + length(disturb) - 1, :) + disturb;
+noisySong = music;
+noisySong(FS_Index:FS_Index + length(disturb) - 1, :) = ...
+    noisySong(FS_Index:FS_Index + length(disturb) - 1, :) + disturb;
 
 % Normalize the combined audio to prevent clipping
-noisyMusic = noisyMusic / max(abs(noisyMusic), [], 'all');
+noisySong = noisySong / max(abs(noisySong), [], 'all');
 
 % Save the combined audio as a new file
-audiowrite('noisySong.wav', noisyMusic, Fs_m);
+audiowrite('noisySong.wav', noisySong, Fs_m);
 
 disp('Audio processing completed and saved as noisyAudio.wav');
