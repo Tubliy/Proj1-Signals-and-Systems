@@ -1,41 +1,32 @@
 % Load audio files
-[y_clean, Fs_clean] = audioread('song.wav'); % Reference clean audio
+[y_clean, Fs_clean] = audioread('song.wav'); % Reference clean audio (for comparison, if needed)
 [y_noisy, Fs_noisy] = audioread('noisySong.wav'); % Noisy audio to be cleaned
 
-% Initialize processed audio as the noisy audio
-y_processed = y_noisy;
-
-% Set a threshold for residual noise
-threshold = 0.001; 
-
-% Initial residual to enter the loop
-residual = inf;
-
-% Start the feedback loop
-while residual > threshold
-    % Perform FFT  
-    Y_clean = fft(y_clean);
-    Y_processed = fft(y_processed);
-
-    % Calculate Transfer Function
-    H = Y_clean ./ Y_processed;
-
-    % Apply Noise Cancellation
-    Y_processed = H .* fft(y_noisy);
-
-    % Inverse FFT
-    y_processed = ifft(Y_processed);
-
-    % Calculate residual noise
-    residual = norm(y_processed - y_clean) / norm(y_clean); % Using norm as a measure of difference
+% Ensure both audio files have the same sampling rate
+if Fs_clean ~= Fs_noisy
+    error('Sampling rates of the clean and noisy audio files do not match.');
 end
 
-% Play the final processed audio
-%sound(y_processed, Fs_noisy);
+% Validate and set the cutoff frequency
+nyquist_frequency = Fs_noisy / 2;
+filter_cutoff = 2000; % Example cutoff frequency in Hz
+
+if filter_cutoff >= nyquist_frequency
+    error('Cutoff frequency must be less than the Nyquist frequency (%f Hz).', nyquist_frequency);
+end
+
+% Design a low-pass filter
+filter_order = 8; % Order of the filter (higher orders are steeper but may cause more delay)
+lpFilter = designfilt('lowpassiir', 'FilterOrder', filter_order, ...
+                      'HalfPowerFrequency', filter_cutoff, ...
+                      'SampleRate', Fs_noisy);
+
+% Apply the low-pass filter to the noisy audio
+y_processed = filtfilt(lpFilter, y_noisy); % filtfilt applies zero-phase filtering to avoid phase distortion
 
 % Write the final processed audio to a new file
 output_filename = 'cleanSong.wav'; % Name for the output file
 audiowrite(output_filename, y_processed, Fs_noisy);
 
 % Display a message indicating the completion of the process
-disp('Processed audio file with feedback until clean saved as cleanSong.wav');
+disp('Processed audio file with low-pass filter saved as cleanSong.wav');
