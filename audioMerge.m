@@ -1,52 +1,58 @@
 % Load audio files
-[music, Fs_m] = audioread('song.wav');
-[disturb, Fs_d] = audioread('audiodisturb.wav');
+[song, Fs_s] = audioread('song.wav');
+[noise, Fs_n] = audioread('audionoise.wav');
 
-% Convert disturbance to mono if necessary
-if size(disturb, 2) > 1
-    disturb = mean(disturb, 2);
+% Convert noise to mono if necessary
+if size(noise, 2) > 1
+    noise = mean(noise, 2);
 end
 
 % Resample the disturbance signal to match the song's sampling rate
-if Fs_d ~= Fs_m
+if Fs_n ~= Fs_s
     try
         % Use resample if Signal Processing Toolbox is available
-        disturb = resample(disturb, Fs_m, Fs_d);
+        noise = resample(noise, Fs_s, Fs_n);
     catch
         % Alternative resampling using interp1
-        t_original = (0:length(disturb)-1) / Fs_d; % Original time vector
-        t_target = (0:1/Fs_m:(length(disturb)-1)/Fs_d)'; % Target time vector
-        disturb = interp1(t_original, disturb, t_target, 'linear'); % Linear interpolation
+        disp("Signal Processing Toolbox not installed");
+        t_original = (0:length(noise)-1) / Fs_n; % Original time vector
+        t_target = (0:1/Fs_s:(length(noise)-1)/Fs_n)'; % Target time vector
+        noise = interp1(t_original, noise, t_target, 'linear'); % Linear interpolation
     end
 end
 
-% Specify the starting time for disturbance in seconds
-startTimeofDist = 3;
+% Specify the starting time for noise in seconds
+startTimeofNoise = 10;
 
 % Calculate the starting index for adding the disturbance
-FS_Index = round(startTimeofDist * Fs_m);
+FS_Index = round(startTimeofNoise * Fs_s);
 
 % Ensure the disturbance signal fits within the music signal length
-if FS_Index + length(disturb) > length(music)
-    disturb = disturb(1:length(music) - FS_Index); % Trim disturbance
-elseif FS_Index + length(disturb) < length(music)
-    disturb = [disturb; zeros(length(music) - (FS_Index + length(disturb)), 1)]; % Pad disturbance
+if FS_Index + length(noise) > length(song)
+    noise = noise(1:length(song) - FS_Index); % Trim noise
+elseif FS_Index + length(noise) < length(song)
+    noise = [noise; zeros(length(song) - (FS_Index + length(noise)), 1)]; % Pad noise
 end
 
 % Match channels if music is stereo
-if size(music, 2) > 1 && size(disturb, 2) == 1
-    disturb = [disturb, disturb]; % Convert mono to stereo
+if size(song, 2) > 1 && size(noise, 2) == 1
+    noise = [noise, noise]; % Convert mono to stereo
 end
 
-% Add disturbance to the music
-noisySong = music;
-noisySong(FS_Index:FS_Index + length(disturb) - 1, :) = ...
-    noisySong(FS_Index:FS_Index + length(disturb) - 1, :) + disturb;
+% Add noise to the music
+noisySong = song;
+noisySong(FS_Index:FS_Index + length(noise) - 1, :) = ...
+    noisySong(FS_Index:FS_Index + length(noise) - 1, :) + noise;
 
 % Normalize the combined audio to prevent clipping
 noisySong = noisySong / max(abs(noisySong), [], 'all');
 
 % Save the combined audio as a new file
 audiowrite('noisySong.wav', noisySong, Fs_m);
+
+disp('Sampling rate of Fs_s');
+disp(Fs_s);
+disp('Sampling rate of Fs_n')
+disp(Fs_n);
 
 disp('Audio processing completed and saved as noisySong.wav');
