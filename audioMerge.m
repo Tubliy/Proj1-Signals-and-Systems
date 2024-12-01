@@ -48,7 +48,7 @@ noisySong(FS_Index:FS_Index + length(noise) - 1, :) = ...
 noisySong = noisySong / max(abs(noisySong), [], 'all');
 
 % Save the combined audio as a new file
-audiowrite('noisySong.wav', noisySong, Fs_m);
+audiowrite('noisySong.wav', noisySong, Fs_s);
 
 % Displaying Sampling rates for Procedure
 disp('Sampling rate of Fs_s');
