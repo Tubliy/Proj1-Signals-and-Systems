@@ -49,4 +49,4 @@ noisySong = noisySong / max(abs(noisySong), [], 'all');
 % Save the combined audio as a new file
 audiowrite('noisySong.wav', noisySong, Fs_m);
 
-disp('Audio processing completed and saved as noisyAudio.wav');
+disp('Audio processing completed and saved as noisySong.wav');
