@@ -112,12 +112,6 @@ xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 xlim([0, Fs/2]);
 
-% Spectrogram of audiodisturb.wav
-subplot(4, 3, 12);
-spectrogram(y, 256, [], [], Fs, 'yaxis');
-title('audiodisturb.wav - Spectrogram');
-colorbar;
-
 % Add a global title for the entire figure
 sgtitle('Audio Signal Analysis: Time, Frequency, and Spectrogram Domains');
 
