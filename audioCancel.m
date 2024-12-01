@@ -9,7 +9,7 @@ end
 
 % Validate and set the cutoff frequency
 nyquist_frequency = Fs_noisy / 2;
-filter_cutoff = 2000; % Example cutoff frequency in Hz
+filter_cutoff = 1000; % Example cutoff frequency in Hz
 
 if filter_cutoff >= nyquist_frequency
     error('Cutoff frequency must be less than the Nyquist frequency (%f Hz).', nyquist_frequency);
