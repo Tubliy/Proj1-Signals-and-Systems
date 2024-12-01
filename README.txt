@@ -30,8 +30,8 @@ If you don't have any .wav files in this folder do not worry! The code will gene
 they will just be overwritten.
 
 Step 2: Installing Matlab
-    Matlab is a progamming language that is often used in engineering or mathematics. Their custom IDE can be downloaded at
-Mathworks.com. Follow the instructions that are given to you on the website to create an accound and download the needed software.
+    Matlab is a programming language that is often used in engineering or mathematics. Their custom IDE can be downloaded at
+Mathworks.com. Follow the instructions that are given to you on the website to create an account and download the needed software.
 After Matlab is installed, you may now open it.
 
 Step 3: Opening the folder with all the files
@@ -41,8 +41,8 @@ right click the folder inside the zipped one and choose "Copy path." You then go
 long rectangular box that says "C://Users//..". 
 
 Step 4: Running any file
-    This project was done in a very specific order. So first you'll have to open LavendarTown.m, then audioMerge.m,
-audioCancel.m, and finally timeandfreqPlot.m. This will give you the full experience, however to open any file you must go
+    This project was done in a very specific order. So first you'll have to run LavendarTown.m, then audioMerge.m,
+audioCancel.m, and finally timeandfreqPlot.m. This will give you the full experience, however to run any file you must go
 to the editor tab above. You should then see a green play button on the right hand side. Check the command window to see that 
 it's working!
 
