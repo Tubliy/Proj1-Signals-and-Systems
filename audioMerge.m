@@ -50,6 +50,7 @@ noisySong = noisySong / max(abs(noisySong), [], 'all');
 % Save the combined audio as a new file
 audiowrite('noisySong.wav', noisySong, Fs_m);
 
+% Displaying Sampling rates for Procedure
 disp('Sampling rate of Fs_s');
 disp(Fs_s);
 disp('Sampling rate of Fs_n')
