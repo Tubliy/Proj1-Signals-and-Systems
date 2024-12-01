@@ -33,8 +33,14 @@ melody = [c, g, highb, fs, c, g, highb, fs];
 shortnotes = [lowghalfnote, lowfshalfnote, lowe, b, lowc, lowb, lowe];
 longnotes = [lowewholenote, lowdwholenote, lowewholenote];
 
-% Combine into a song
-song = [melody, shortnotes, longnotes];
+% Make all parts the same length by zero-padding
+maxLength = max([length(melody), length(shortnotes), length(longnotes)]);
+melody = [melody, zeros(1, maxLength - length(melody))];
+shortnotes = [shortnotes, zeros(1, maxLength - length(shortnotes))];
+longnotes = [longnotes, zeros(1, maxLength - length(longnotes))];
+
+% Combine parts by adding them together
+song = melody + shortnotes + longnotes;
 
 % Normalize song to avoid clipping
 song = song / max(abs(song));
