@@ -48,9 +48,9 @@ it's working!
 
     How it works-
 
-LavendarTown.m outputs a song.wav file, this is then used in audioMerge.m with another sound of a guitar to create
+LavendarTown.m outputs a song.wav file, this is then used in audioMerge.m with another sound of a noise to create
 a noisySong.wav. This is the previous song but with a white noise added. To get rid of this noise you open audioCancel.m 
-this should cancel out the guitar and leave you with what you heard in the begging.
+this should cancel out the noise and leave you with what you heard in the begging.
 
  Finally, timeandfreqPlot.m allows you to visualize what just happened with the sine wave's of the signals in time, frequency, and '
 with a spectrogram.
