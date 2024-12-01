@@ -21,7 +21,7 @@ if Fs_d ~= Fs_m
 end
 
 % Specify the starting time for disturbance in seconds
-startTimeofDist = 9;
+startTimeofDist = 3;
 
 % Calculate the starting index for adding the disturbance
 FS_Index = round(startTimeofDist * Fs_m);
