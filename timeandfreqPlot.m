@@ -90,24 +90,24 @@ title('cleanSong.wav - Spectrogram');
 colorbar;
 
 % Plot for 'audiodisturb.wav'
-[y, Fs] = audioread('audiodisturb.wav');
+[y, Fs] = audioread('audionoise.wav');
 duration = length(y) / Fs;
 t = linspace(0, duration, length(y));
 Y = fft(y);
 freq_resolution = Fs / length(Y);
 f = linspace(0, Fs - freq_resolution, length(Y));
 
-% Time domain of audiodisturb.wav
+% Time domain of audionoise.wav
 subplot(4, 3, 10);
 plot(t, y);
-title('audiodisturb.wav - Time Domain');
+title('audionoise.wav - Time Domain');
 xlabel('Time (s)');
 ylabel('Amplitude');
 
-% Frequency domain of audiodisturb.wav
+% Frequency domain of audionoise.wav
 subplot(4, 3, 11);
 plot(f, abs(Y));
-title('audiodisturb.wav - Frequency Domain');
+title('audionoise.wav - Frequency Domain');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
 xlim([0, Fs/2]);
