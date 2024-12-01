@@ -29,9 +29,9 @@ lowcsharphalfnote = sin(2*pi*277.183*(0:0.000125:1.4));
 lowdsharphalfnote = sin(2*pi*311.127*(0:0.000125:1.4));
 
 % Create song segments
-melody = [c, g, highb, fs, c, g, highb, fs];
-shortnotes = [lowghalfnote, lowfshalfnote, lowe, b, lowc, lowb, lowe];
-longnotes = [lowewholenote, lowdwholenote, lowewholenote];
+melody = [c, g, highb, fs, c, g, highb, fs,c, g, highb, fs, c, g, highb, fs,];
+shortnotes = [c, g, highb, fs,lowghalfnote, lowghalfnote,lowfshalfnote,lowfshalfnote,lowg,lowfs,lowe,b,lowe,lowc,lowb,lowe];
+longnotes = [c, g, highb, fs,lowewholenote, lowdwholenote, lowewholenote,lowcsharphalfnote,lowdsharphalfnote];
 
 % Make all parts the same length by zero-padding
 maxLength = max([length(melody), length(shortnotes), length(longnotes)]);
