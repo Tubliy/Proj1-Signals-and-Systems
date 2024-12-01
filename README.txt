@@ -23,7 +23,7 @@ Two signals are merged song.wav and audionoise.wav into one noisySong.wav. Then 
 The following steps will provide you with a detailed guide on how to run everything listed in this zip.
 
 
-Step 1: File Preperation
+Step 1: File Preparation
     Make sure that you have all the files provided in this zip. These files include "audioCancel.m, audioMerge.m,
 LavendarTown.m,timeandfreqPlot.m" These are crucial files that you'll need to eventually get the audios provided as well.
 If you don't have any .wav files in this folder do not worry! The code will generate these files, and if you do have them
@@ -52,6 +52,6 @@ LavendarTown.m outputs a song.wav file, this is then used in audioMerge.m with a
 a noisySong.wav. This is the previous song but with a white noise added. To get rid of this noise you open audioCancel.m 
 this should cancel out the guitar and leave you with what you heard in the begging.
 
- Finally, timeandfreqPlot.m allows you to visualise what just happened with the sine wave's of the signals in time, frequency, and '
+ Finally, timeandfreqPlot.m allows you to visualize what just happened with the sine wave's of the signals in time, frequency, and '
 with a spectrogram.
 
